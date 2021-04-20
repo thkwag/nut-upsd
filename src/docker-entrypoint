@@ -31,7 +31,21 @@ cat >/etc/nut/upsd.users <<EOF
 [monitor]
 	password = $API_PASSWORD
 	upsmon master
+
+[remote]
+	password = $API_PASSWORD
+	upsmon master
 EOF
+
+if [ -z "$ENABLE_SYNOLOGY_USER" ]
+then
+cat >>/etc/nut/upsd.users <<EOF
+# for Synology Diskstation
+[monuser]
+        password = secret
+        upsmon slave
+EOF
+fi
 
 cat >/etc/nut/upsmon.conf <<EOF
 MONITOR $UPS_NAME@localhost 1 monitor $API_PASSWORD master

@@ -14,6 +14,8 @@ ENV ADMIN_PASSWORD=""
 
 ENV SHUTDOWN_CMD="echo 'System shutdown not configured!'"
 
+ENV ENABLE_SYNOLOGY_USER=""
+
 RUN set -ex; \
 	# run dependencies
 	apk add --no-cache \

@@ -64,3 +64,6 @@ This is the password for the upsmon user.
 
 This is the command upsmon will run when the system needs to be brought down. The command will be run from inside the container.
 
+### ENABLE_SYNOLOGY_USER
+
+*Default vaue*: `"'`
