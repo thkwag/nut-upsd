@@ -42,6 +42,7 @@ RUN set -ex; \
 		--disable-static \
 		--with-all=no \
 		--with-usb=yes \
+		--with-drivers=apcsmart,usbhid-ups \
 		--datadir=/usr/share/nut \
 		--with-drvpath=/usr/share/nut \
 		--with-statepath=/var/run/nut \

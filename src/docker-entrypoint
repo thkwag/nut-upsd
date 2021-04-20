@@ -37,9 +37,10 @@ cat >/etc/nut/upsd.users <<EOF
 	upsmon master
 EOF
 
-if [ -z "$ENABLE_SYNOLOGY_USER" ]
+if [ "$ENABLE_SYNOLOGY_USER" == "true" ]
 then
 cat >>/etc/nut/upsd.users <<EOF
+
 # for Synology Diskstation
 [monuser]
         password = secret
@@ -52,7 +53,14 @@ MONITOR $UPS_NAME@localhost 1 monitor $API_PASSWORD master
 SHUTDOWNCMD "$SHUTDOWN_CMD"
 EOF
 
-chgrp -R nut /etc/nut /dev/bus/usb
+if [ "$UPS_PORT" -eq "auto" ]
+then
+	chgrp -R nut /dev/bus/usb
+else
+	chgrp nut $UPS_PORT
+fi
+
+chgrp -R nut /etc/nut
 chmod -R o-rwx /etc/nut
 
 /usr/sbin/upsdrvctl start
